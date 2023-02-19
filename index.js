@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import cors from "cors";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const PUBLISHABLE_KEY =
     "pk_test_51Md43MJNJYoa22nr14xn6Cdbu8SK6iAh3ANU5HpCDZd55eaDm9ub6oPizhAbAFlTugORVNTRZhMnodHIwt5ZVn2L00xhk2Ntn7",
@@ -32,11 +32,11 @@ app.post("/create-payment-intent", async (req, res) => {
 
     res.json({ clientSecret });
   } catch (error) {
-    console.log(error.message);
+    console.log("error.message = ", error.message);
     res.json({ error: error.message });
   }
 });
 
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
