@@ -1,10 +1,10 @@
 const PUBLISHABLE_KEY =
     "pk_test_51Md43MJNJYoa22nr14xn6Cdbu8SK6iAh3ANU5HpCDZd55eaDm9ub6oPizhAbAFlTugORVNTRZhMnodHIwt5ZVn2L00xhk2Ntn7",
-  SECRET_KEY =
+  STRIPE_SECRET_KEY =
     "sk_test_51Md43MJNJYoa22nrlqZ8VHRnnv0PAb2ZD2CgMnDt4WY2PxpDuWu3YeAOuFBV750UpAXLtPhtNHLvF95oJQRnk4hL002HRyNwBr";
 
 const express = require("express");
-const stripe = require("stripe")(SECRET_KEY);
+const stripe = require("stripe")(STRIPE_SECRET_KEY);
 const cors = require("cors");
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-  return res.json({ message: "Hello World!" });
+  return res.json({ message: "Hello World!", STRIPE_SECRET_KEY });
 });
 
 app.post("/create-payment-intent", async (req, res) => {
