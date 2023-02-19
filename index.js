@@ -1,5 +1,4 @@
 import express from "express";
-import Stripe from "stripe";
 import cors from "cors";
 
 const app = express();
@@ -9,7 +8,7 @@ const PUBLISHABLE_KEY =
     "pk_test_51Md43MJNJYoa22nr14xn6Cdbu8SK6iAh3ANU5HpCDZd55eaDm9ub6oPizhAbAFlTugORVNTRZhMnodHIwt5ZVn2L00xhk2Ntn7",
   SECRET_KEY =
     "sk_test_51Md43MJNJYoa22nrlqZ8VHRnnv0PAb2ZD2CgMnDt4WY2PxpDuWu3YeAOuFBV750UpAXLtPhtNHLvF95oJQRnk4hL002HRyNwBr";
-const stripe = Stripe(SECRET_KEY);
+const stripe = require("stripe")(SECRET_KEY);
 
 app.use(cors());
 app.use(express.json());
