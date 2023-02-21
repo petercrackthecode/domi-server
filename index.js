@@ -19,10 +19,20 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/create-payment-intent", async (req, res) => {
-  console.log("create-payment-intent called");
+  const { amount } = req.body;
+  if (!amount) return res.json({ error: "amount is required" });
+
+  let amountNumber = 0;
+
+  try {
+    amountNumber = ParseInt(req.body.amount, 10);
+  } catch (error) {
+    return res.json({ error: "amount is not a number" });
+  }
+
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099,
+      amount: amountNumber * 100,
       currency: "usd",
       payment_method_types: ["card"], // by default
     });
